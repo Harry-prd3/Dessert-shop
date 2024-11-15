@@ -1,34 +1,59 @@
+from abc import ABC, abstractmethod
+
 #superclass
-class DessertItem():
-    def __init__(self, name):
+class DessertItem(ABC):
+    def __init__(self, name, tax_percent = 7.25):
         self.name = name
+        self.tax_percent = tax_percent
     
     def __str__(self):
         return(f"the name of this item is: {self.name}")
+
+    @abstractmethod
+    def calculate_cost():
+        pass
+    
+    def cacluate_tax(self, cost):
+        return cost * self.tax_percent
     
 class Candy(DessertItem):
     def __init__(self, name, weight, price_per_pound):
         super().__init__(name)
         self.cand_weight = weight
         self.price_per_pound = price_per_pound
+    
+    def calculate_cost(self):
+        cost = self.cand_weight * self.price_per_pound
+        return cost
 
 class Cookie(DessertItem):
     def __init__(self, name, quantity, price_per_dozen):
         super().__init__(name)
         self.quantity = quantity
         self.price_per_dozen = price_per_dozen
+    
+    def calculate_cost(self):
+        cost = self.quantity/self.price_per_dozen
+        return cost
 
 class IceCream(DessertItem):
     def __init__(self, name, scoop_count, price_per_scoop):
         super().__init__(name)
         self.scoop_count = scoop_count
         self.price_per_scoop = price_per_scoop
+    
+    def calculate_cost(self):
+        cost = self.scoop_count * self.price_per_scoop
+        return cost
 
 class Sundae(IceCream):
     def __init__(self, name, scoop_count, price_per_scoop, topping_name, topping_price):
         super().__init__(name, scoop_count, price_per_scoop)
         self.topping_name = topping_name
         self.topping_price = topping_price
+    
+    def calculate_cost(self):
+        return super().calculate_cost() + self.topping_price
 
 class order():
     def __init__ (self):
@@ -41,9 +66,18 @@ class order():
     
     def __len__(self):
         count = 0
-        for i in self.order:
+        for item in self.order:
             count +=1
         return count
+
+    def order_cost(self):
+        price = 0
+        for item in self.order:
+            price += item.calculate_cost()
+        return price
+    
+    def order_tax(self):
+        total = DessertItem.cacluate_tax(order)
 
     def __str__(self):
         count = 0
