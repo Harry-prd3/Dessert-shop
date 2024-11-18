@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from receipt import *
 
 #superclass
 class DessertItem(ABC):
@@ -98,9 +99,19 @@ def main():
     defaultOrder.add_Item(Sundae("Vanilla", 3, .69, "Hot Fudge", 1.29))
     defaultOrder.add_Item(Cookie("Oatmeal Raisin", 2, 3.45))
 
+    DATA = [ 
+	[ "Name", "Price", "Tax" ] 
+    ] 
 
-    
-    print(defaultOrder)
+    for item in defaultOrder.order:
+        DATA.append([item.name, "$" + str(round(item.calculate_cost,2)), "$" + str(round(item.cacluate_tax,2))])
+    DATA.append(["subtotal", "$"+ str(round(defaultOrder.order_cost,2)), "$"+ str(round(defaultOrder.order_tax,2))])
+    DATA.append(["Total", "", "$"+ str(round(defaultOrder.order_cost + defaultOrder.order_tax,2))])
+    DATA.append("Total items in order", "", str(defaultOrder.__len__()))
+
+    make_recipt(DATA, "recipt.pdf")
+
+
 
 
 #runner
