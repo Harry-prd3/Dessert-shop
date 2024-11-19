@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from receipt import *
 
+
 #superclass
 class DessertItem(ABC):
     def __init__(self, name, tax_percent = 7.25):
@@ -14,8 +15,9 @@ class DessertItem(ABC):
     def calculate_cost():
         pass
     
-    def cacluate_tax(self, cost):
-        return cost * self.tax_percent
+    def cacluate_tax(self):
+        cost = self.order_cost()
+        return (cost * self.tax_percent) - cost
     
 class Candy(DessertItem):
     def __init__(self, name, weight, price_per_pound):
@@ -25,7 +27,7 @@ class Candy(DessertItem):
     
     def calculate_cost(self):
         cost = self.cand_weight * self.price_per_pound
-        return cost
+        return round(cost,2)
 
 class Cookie(DessertItem):
     def __init__(self, name, quantity, price_per_dozen):
@@ -35,7 +37,7 @@ class Cookie(DessertItem):
     
     def calculate_cost(self):
         cost = self.quantity/self.price_per_dozen
-        return cost
+        return round(cost,2)
 
 class IceCream(DessertItem):
     def __init__(self, name, scoop_count, price_per_scoop):
@@ -45,7 +47,7 @@ class IceCream(DessertItem):
     
     def calculate_cost(self):
         cost = self.scoop_count * self.price_per_scoop
-        return cost
+        return round(cost,2)
 
 class Sundae(IceCream):
     def __init__(self, name, scoop_count, price_per_scoop, topping_name, topping_price):
@@ -55,64 +57,3 @@ class Sundae(IceCream):
     
     def calculate_cost(self):
         return super().calculate_cost() + self.topping_price
-
-class order():
-    def __init__ (self):
-        order = []
-        self.order = order
-
-    def add_Item(self, item):
-        item = [item]
-        self.order += item
-    
-    def __len__(self):
-        count = 0
-        for item in self.order:
-            count +=1
-        return count
-
-    def order_cost(self):
-        price = 0
-        for item in self.order:
-            price += item.calculate_cost()
-        return price
-    
-    def order_tax(self):
-        total = DessertItem.cacluate_tax(order)
-
-    def __str__(self):
-        count = 0
-        for item in self.order:
-            print(self.order[self.order.index(item)])
-            count += 1
-        return(f"you have {count} item(s) in your order.")
-
-
-
-
-def main():
-    defaultOrder = order()
-    defaultOrder.add_Item(Candy("Candy Corn", 1.5, .25))
-    defaultOrder.add_Item(Candy("Gummy Bears", .25, .35))
-    defaultOrder.add_Item(Cookie("Chocolate Chip", 6, 3.99))
-    defaultOrder.add_Item(IceCream("Pistachio", 2, .79))
-    defaultOrder.add_Item(Sundae("Vanilla", 3, .69, "Hot Fudge", 1.29))
-    defaultOrder.add_Item(Cookie("Oatmeal Raisin", 2, 3.45))
-
-    DATA = [ 
-	[ "Name", "Price", "Tax" ] 
-    ] 
-
-    for item in defaultOrder.order:
-        DATA.append([item.name, "$" + str(round(item.calculate_cost,2)), "$" + str(round(item.cacluate_tax,2))])
-    DATA.append(["subtotal", "$"+ str(round(defaultOrder.order_cost,2)), "$"+ str(round(defaultOrder.order_tax,2))])
-    DATA.append(["Total", "", "$"+ str(round(defaultOrder.order_cost + defaultOrder.order_tax,2))])
-    DATA.append("Total items in order", "", str(defaultOrder.__len__()))
-
-    make_recipt(DATA, "recipt.pdf")
-
-
-
-
-#runner
-main()
