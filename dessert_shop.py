@@ -24,10 +24,12 @@ class order():
         return price
     
     def order_tax(self):
-        for Dessertitem in order.__len__():
-            total = 0
-            total =+ DessertItem.cacluate_tax(order)
-        return total
+        total = 0
+        for item in self.order:
+            print(total)
+            total += item.cacluate_tax()
+            
+        return round(total,2)
 
     def __str__(self):
         count = 0
@@ -53,12 +55,13 @@ def main():
     ] 
 
     for item in defaultOrder.order:
-        DATA.append([item.name, "$" + str((item.calculate_cost)), "$" + str((item.cacluate_tax))])
+        DATA.append([item.name, "$" + str((item.calculate_cost())), "$" + str((item.cacluate_tax()))])
     DATA.append(["subtotal", "$"+ str((defaultOrder.order_cost())), "$"+ str((defaultOrder.order_tax()))])
     DATA.append(["Total", "", "$"+ str((defaultOrder.order_cost() + defaultOrder.order_tax()))])
-    DATA.append("Total items in order", "", str(defaultOrder.__len__()))
+    DATA.append(["Total items in order", "", str(defaultOrder.__len__())])
 
     make_recipt(DATA, "recipt.pdf")
+    print(DATA)
 
 
 
