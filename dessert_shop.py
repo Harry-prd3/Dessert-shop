@@ -24,7 +24,7 @@ class order():
         return price
     
     def order_tax(self):
-        for Dessertitem in order.__len__():
+        for Dessertitem in len(order)():
             total = 0
             total =+ DessertItem.cacluate_tax(order)
         return total
