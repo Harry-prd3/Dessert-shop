@@ -16,8 +16,9 @@ class DessertItem(ABC):
         pass
     
     def cacluate_tax(self):
-        cost = self.order_cost()
-        return (cost * self.tax_percent) - cost
+        cost = self.calculate_cost()
+        tax_rate = self.tax_percent/100
+        return round((cost * tax_rate),2)
     
 class Candy(DessertItem):
     def __init__(self, name, weight, price_per_pound):
@@ -36,7 +37,8 @@ class Cookie(DessertItem):
         self.price_per_dozen = price_per_dozen
     
     def calculate_cost(self):
-        cost = self.quantity/self.price_per_dozen
+        dosnons = self.quantity/12
+        cost = dosnons * self.price_per_dozen
         return round(cost,2)
 
 class IceCream(DessertItem):
