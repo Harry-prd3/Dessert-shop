@@ -43,6 +43,9 @@ class DessertShop:
         pass
 
     def user_prompt_candy(self):
+        typ = False
+        weight = False
+        price = False
         while typ != str:
             typ = input("what type of candy?: ")
         while weight != float:
@@ -116,16 +119,9 @@ def main():
 
 
     shop = DessertShop()
-    '''
-    order.add(Candy('Candy Corn', 1.5, 0.25))
-    order.add(Candy('Gummy Bears', 0.25, 0.35))
-    order.add(Cookie('Chocolate Chip', 6, 3.99))
-    order.add(IceCream('Pistachio', 2, 0.79))
-    order.add(Sundae('Vanilla', 3, 0.69, 'Hot Fudge', 1.29))
-    order.add(Cookie('Oatmeal Raisin', 2, 3.45))
-    '''
+    
     # boolean done = false
-    done: bool = False
+    done: bool = True
     # build the prompt string once
     prompt = '\n'.join([ '\n',
     '1: Candy',
@@ -134,31 +130,30 @@ def main():
     '4: Sunday',
     '\nWhat would you like to add to the order? (1-4, Enter for done): '
     ])
-    while not done:
+    while done:
         choice = input(prompt)
-    match choice:
-        case '':
-            done = True
-        case '1':
+        if choice ==  '':
+                done = False
+        elif choice == '1':
             item = shop.user_prompt_candy()
             defaultOrder.add_Item(item)
             print(f'{item.name} has been added to your order.')
-        case '2':
+        elif choice == '2':
             item = shop.user_prompt_cookie()
             defaultOrder.add_Item(item)
             print(f'{item.name} has been added to your order.')
-        case '3':
+        elif choice == '3':
             item = shop.user_prompt_icecream()
             defaultOrder.add_Item(item)
             print(f'{item.name} has been added to your order.')
-        case '4':
+        elif '4':
             item = shop.user_prompt_sundae()
             defaultOrder.add_Item(item)
             print(f'{item.name} has been added to your order.')
-        case _:
+        else:
             print('Invalid response: Please enter a choice from the menu (1-4) or Enter')
-    print()
-    
+        print()
+        
 
 
 
