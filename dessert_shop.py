@@ -46,12 +46,12 @@ class DessertShop:
         typ = False
         weight = False
         price = False
-        while typ != str:
+        while type(typ) != str:
             typ = input("what type of candy?: ")
-        while weight != float:
-            weight = float(input("what is the weight of the candy?(decimal): "))
+        while type(weight) != float:
+            weight = input("what is the weight of the candy?(decimal): ")
         while price != float:
-            price =  float(input("what is the the price per pound?(decimal): "))
+            price =  input("what is the the price per pound?(decimal): ")
 
         user_candy = Candy(typ, weight, price)
         return user_candy
