@@ -57,6 +57,9 @@ class DessertShop:
         return user_candy
 
     def user_prompt_cookie(self):
+        typ = False
+        qunt = False
+        price = False
         while typ != str:
             typ = input("what type of cookie?: ")
         while qunt != int:
@@ -68,6 +71,9 @@ class DessertShop:
         return user_cookie
 
     def user_prompt_icecream(self):
+        typ = False
+        scoops = False
+        price = False
         while typ != str:
             typ = input("what type of ice cream?: ")
         while scoops != int:
@@ -79,6 +85,11 @@ class DessertShop:
         return user_icecream
 
     def user_prompt_sundae(self):
+        typ = False
+        scoops = False
+        price = False
+        top = False
+        pice = False
         while typ != str:
             typ = input("what type of ice cream?: ")
         while scoops != int:
@@ -120,6 +131,8 @@ def main():
 
     shop = DessertShop()
     
+    shop.user_prompt_candy()
+
     # boolean done = false
     done: bool = True
     # build the prompt string once
@@ -154,8 +167,6 @@ def main():
             print('Invalid response: Please enter a choice from the menu (1-4) or Enter')
         print()
         
-
-
 
 
 #runner
