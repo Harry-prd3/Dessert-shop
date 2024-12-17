@@ -46,7 +46,7 @@ def test_sundae_cost():
     assert instance.calculate_cost() == 3
 
 def test_super():
-    assert Candy("Candy Corn", 1.5, .25).cacluate_tax() == 
+    assert Candy("Candy Corn", 1.5, .25)
     assert Candy("Gummy Bears", .25, .35)
     assert Cookie("Chocolate Chip", 6, 3.99)
     assert IceCream("Pistachio", 2, .79)

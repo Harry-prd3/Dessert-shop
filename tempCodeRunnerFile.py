@@ -1,1 +1,1 @@
-type(typ) != str
+                break

@@ -46,12 +46,27 @@ class DessertShop:
         typ = False
         weight = False
         price = False
-        while type(typ) != str:
-            typ = input("what type of candy?: ")
-        while type(weight) != float:
-            weight = input("what is the weight of the candy?(decimal): ")
-        while price != float:
-            price =  input("what is the the price per pound?(decimal): ")
+        while True:
+            try:
+                typ = input("what type of candy?: ")
+                type(typ) == str
+                break
+            except ValueError:
+                pass
+        while True:
+            try:
+                weight = float(input("what is the weight of the candy?(decimal): "))
+                type(weight) == float
+                break
+            except ValueError:
+                pass
+        while True:
+            try:
+                price = float(input("what is the the price per pound?(decimal): "))
+                type(price) == float
+                break
+            except ValueError:
+                pass
 
         user_candy = Candy(typ, weight, price)
         return user_candy
@@ -60,13 +75,27 @@ class DessertShop:
         typ = False
         qunt = False
         price = False
-        while typ != str:
-            typ = input("what type of cookie?: ")
-        while qunt != int:
-            qunt = int(input("how many cookies?(number): "))
-        while price != float:
-            price =  float(input("what is the the price per d?(decimal): "))
-
+        while True:
+            try:
+                typ = input("what type of cookie?: ")
+                type(typ) == str
+                break
+            except ValueError:
+                pass
+        while True:
+            try:
+                qunt = input("how many cookies(number)?: ")
+                type(qunt) == float
+                break
+            except ValueError:
+                pass
+        while True:
+            try:
+                price =  float(input("what is the the price per dozen?(decimal): "))
+                type(price) == float
+                break
+            except ValueError:
+                pass
         user_cookie = Cookie(typ, qunt, price)
         return user_cookie
 
@@ -74,12 +103,27 @@ class DessertShop:
         typ = False
         scoops = False
         price = False
-        while typ != str:
-            typ = input("what type of ice cream?: ")
-        while scoops != int:
-            scoops = int(input("how many scoops do you have?(number): "))
-        while price != float:
-            price =  float(input("what is the the price per scoop?(decimal): "))
+        while True:
+            try:
+                typ = input("what type of ice creame?: ")
+                type(typ) == str
+                break
+            except ValueError:
+                pass
+        while True:
+            try:
+                scoops = int(input("how many scoops do you have?: "))
+                type(scoops) == int
+                break
+            except ValueError:
+                pass
+        while True:
+            try:
+                price =  float(input("what is the the price per scoop?(decimal): "))
+                type(price) == float
+                break
+            except ValueError:
+                pass
 
         user_icecream = IceCream(typ, scoops, price)
         return user_icecream
@@ -90,16 +134,41 @@ class DessertShop:
         price = False
         top = False
         pice = False
-        while typ != str:
-            typ = input("what type of ice cream?: ")
-        while scoops != int:
-            scoops = int(input("how many scoops do you have?(number): "))
-        while price != float:
-            price =  float(input("what is the the price per scoop?(decimal): "))
-        while top != str:
-            top = input("what topping do you have?: ")
-        while pice != float:
-            pice = float(input("what is the topping price?(decimal): "))
+        while True:
+            try:
+                typ = input("what type of ice creame?: ")
+                type(typ) == str
+                break
+            except ValueError:
+                pass
+        while True:
+            try:
+                scoops = int(input("how many scoops do you have?: "))
+                type(scoops) == int
+                break
+            except ValueError:
+                pass
+        while True:
+            try:
+                price =  float(input("what is the the price per scoop?(decimal): "))
+                type(price) == float
+                break
+            except ValueError:
+                pass
+        while True:
+            try:
+                top = input("what topping do you have?: ")
+                type(top) == str
+                break
+            except ValueError:
+                pass
+        while True:
+            try:
+                pice = float(input("what is the topping price?(decimal): "))
+                type(pice) == float
+                break
+            except ValueError:
+                pass
 
         user_sundae = Sundae(typ, scoops, price,top,pice)
         return user_sundae
@@ -115,7 +184,7 @@ def main():
     defaultOrder.add_Item(IceCream("Pistachio", 2, .79))
     defaultOrder.add_Item(Sundae("Vanilla", 3, .69, "Hot Fudge", 1.29))
     defaultOrder.add_Item(Cookie("Oatmeal Raisin", 2, 3.45))
-
+    
     DATA = [ 
 	[ "Name", "Price", "Tax" ] 
     ] 
@@ -130,8 +199,6 @@ def main():
 
 
     shop = DessertShop()
-    
-    shop.user_prompt_candy()
 
     # boolean done = false
     done: bool = True
